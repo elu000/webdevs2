@@ -1,0 +1,175 @@
+––<!DOCTYPE html>
+<html>
+    <head>
+       <title>Chicago Crime Data Set</title>
+       <style>
+        body {
+            font-family: sans-serif;
+            background-color: #7597af;
+            margin:2%;
+            color: white;
+        }
+        .mainHeader {
+            font-family: sans-serif;
+        }
+        #findCrime{
+            border: 5px solid #736759;
+            background-color: #7597af;
+            color: white;
+            height: 50px;
+            width: 150px;
+            font-family: "Arial Black";
+        }
+        #findCrime:hover {
+            border: 5px solid #6495ED;
+        }
+        #options{
+            background-color:red;
+        }
+        .outputHeader {
+            color:#e6c89d;
+            font-family:sans-serif;
+        }
+        #eachOutput {
+            border: 5px solid #3c362e;
+            padding: 10px;
+            margin: 5px;
+            width: 500px;
+        }
+        .floatRight {
+            float: right;
+            background-attachment: fixed;
+        }
+        #districtImage {
+            clear: right;
+        }
+        #linkToMap {
+            color: 	#6495ED;
+        }
+    </style>
+    </head>
+    <body>
+    <h1 class="mainHeader">Select an Option From the Dropdown Menu to Find Information About That Kind of Crime in Chicago.</h1>
+    <p></p>
+   <hr>
+   <div class="floatRight">
+   <p>Here's a map of all the Chicago Districts:</p>
+   <img src="http://home.chicagopolice.org/wp-content/uploads/2014/11/communitymap_preview.png" alt="25 Disticts of Chicago" style="width:500px;height:500px;">
+    </div>
+    <p>Crime Type: </p>
+    <select id="crimeType">
+      <option value="ARSON">ARSON</option>
+      <option value="ASSAULT">ASSAULT</option>
+      <option value="BATTERY">BATTERY</option>
+      <option value="BURGLARY">BURGLARY</option>
+      <option value="CRIMINAL DAMAGE">CRIMINAL DAMAGE</option>
+      <option value="CRIMINAL TRESPASS">CRIMINAL TRESPASS</option>
+      <option value="CRIMSEXUAL ASSAULT">CRIMINAL SEXUAL ASSAULT</option>
+      <option value="DECEPTIVE PRACTICE">DECEPTIVE PRACTICE</option>
+      <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
+    </select>
+    <br>
+    <br>
+    <p id="separatingText">OTHER CRIME DATA FILTERS (OPTIONAL)</p>
+    
+    <p>Location Description: </p>
+    <select id="locationDescription">
+      <option value="NONE SELECTED">NONE SELECTED</option>
+      <option value="APARTMENT">APARTMENT</option>
+      <option value="SIDEWALK">SIDEWALK</option>
+      <option value="STREET">STREET</option>
+      <option value="BARBERSHOP">BARBERSHOP</option>
+      <option value="ALLEY">ALLEY</option>
+      <option value="RESIDENCE">RESIDENCE</option>
+      <option value="GAS STATION">GAS STATION</option>
+      <option value="SMALL RETAIL STORE">SMALL RETAIL STORE</option>
+      <option value="OTHER">OTHER</option>
+    </select>
+    
+    <p>District Number: </p>
+    <select id="districtNumber">
+      <option value="NONE SELECTED">NONE SELECTED</option>
+      <option value="001">001</option>
+      <option value="002">002</option>
+      <option value="003">003</option>
+      <option value="004">004</option>
+      <option value="005">005</option>
+      <option value="006">006</option>
+      <option value="007">007</option>
+      <option value="008">008</option>
+      <option value="009">009</option>
+      <option value="010">010</option>
+      <option value="011">011</option>
+      <option value="012">012</option>
+      <option value="013">013</option>
+      <option value="014">014</option>
+      <option value="015">015</option>
+      <option value="016">016</option>
+      <option value="017">017</option>
+      <option value="018">018</option>
+      <option value="019">019</option>
+      <option value="020">020</option>
+      <option value="021">021</option>
+      <option value="022">022</option>
+      <option value="023">023</option>
+      <option value="024">024</option>
+      <option value="025">025</option>
+    </select> 
+    
+    <br>
+    <br>
+    <button id='findCrime'>Find Crime</button>
+    <p>Click the above button to return the data.</p>
+    <br>
+    <br>
+    <div id="output"></div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    <script>
+        $("#findCrime").click(function() {
+            $("#output").empty();
+            var baseURL = "https://data.cityofchicago.org/resource/6zsd-86xi.json";
+            var keywordCrimeType = $('#crimeType').val();
+            var filters = "?primary_type=" + keywordCrimeType;
+            var newURL = baseURL + filters;
+            
+            var keywordLocation = $("#locationDescription").val()
+            if (keywordLocation !== "NONE SELECTED") {
+                newURL = newURL + "&location_description=" + keywordLocation;
+            }
+            
+            var keywordDistrict = $("#districtNumber").val()
+            if (keywordDistrict !== "NONE SELECTED") {
+                newURL = newURL + "&district=" + keywordDistrict;
+            }
+            
+            console.log(newURL);
+            
+                $.getJSON(newURL)
+                    .done (function (data) {
+                        console.log(data);
+                        
+                        $.each(data, function(index, value){
+                            var firstAddress = value.block;
+                            var realAddress = firstAddress.slice(5);
+                            var latlong = value.latitude + "," + value.longitude;
+                            console.log(realAddress)
+                            var html= "<div id='eachOutput'>" + "<h1 class='outputHeader'>Crime: " + value.primary_type + "</h1>"
+                                      +"<p>Address: " + value.block + "</p>" 
+                                      +"<p>Type of Location: " + value.location_description + "</p>"
+                                      +"<p>Case Number: " + value.case_number + "</p>"
+                                      +"<p>Date: " + value.date + "</p>" 
+                                      +"<p>Map:" + "<br><br>" + "<a href = https://www.google.com/maps/@" + value.latitude + "," + value.longitude + "," + "14z target='_blank'" + ">" + "LINK TO MAP" + "</a>"
+                                      + "</div>";
+                            
+                            $("#output").append(html);
+                        });
+                    }); 
+                 
+        });
+        
+                    
+    </script>
+    </body>
+</html>
