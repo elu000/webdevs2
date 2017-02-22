@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bike Racks in Chicago Communities </title>
+    </head>
+    <body>
+        <h1>Bike Racks in Chicago Communities</h1>
+        <button id="submit">Submit</button>
+        <a href="https://data.cityofchicago.org/Transportation/Bike-Racks/cbyb-69xx">Bike Racks Data</a>
+        <div id="results"></div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <script>
+            /*
+                This script retrieves the towed data information
+                from the City of Chicago Data Portal
+                
+                You are required to enter the information for your vehicle
+                as a license plate number
+            
+            */
+            
+            var bikeRacks;
+            
+            $(function(){
+                
+                $("#submit").click(function(){
+                    
+                    var html = "";
+                    
+                    // base URL to the food inspections data
+                    var baseURL = 'https://data.cityofchicago.org/resource/uh4d-zh38.json';
+                    
+                    // optional filters we're appending - date range and zip
+                    var filters = "";
+                    
+                    // full URL
+                    var url = baseURL;
+                        
+                    $.getJSON(url).done (function (data) {
+                        // TODO:  add script to add data to the DOM
+                        console.log(data);
+                        // loop through the records
+                        
+                        bikeRacks = data;
+                        
+                        var mntg = 0, lop = 0, nns = 0, nws = 0, arch = 0, grdb = 0, lkev = 0, wash = 0, oth = 0;
+                        
+                        if(bikeRacks.length == 0){
+                            html = "No Bike Racks Found";
+                        } else{
+                            $.each(bikeRacks, function(index, value){
+                                    var place = value.community_name;
+                                    if (place == "Mount Greenwood")
+                                        mntg++;
+                                    else if(place == "Loop")
+                                        lop++;
+                                    else if(place == "Near North Side")
+                                        nns++;
+                                    else if(place == "Near West Side")
+                                        nws++;
+                                    else if(place == "Archer Heights")
+                                        arch++;
+                                    else if(place == "Grand Boulevard")
+                                        grdb++;
+                                    else if(place == "Lake View")
+                                        lkev++;
+                                    else if (place == "Washington Heights")
+                                        wash++;
+                                    else
+                                        oth++;
+                                }
+                            );  // end of .each loop
+                            
+                            /*html = "<p>Black: " + blk + "<br>" +
+                                    "White: " + whi + "<br>" +
+                                    "Grey: " + gry + "<br>" +
+                                    "Silver: " + sil + "<br>" +
+                                    "Green: " + grn + "<br>" +
+                                    "Blue: " + blu + "<br>" +
+                                    "Red: " + red + "</p>";*/
+                            // Load the Visualization API and the corechart package.
+                          google.charts.load('current', {'packages':['corechart']});
+                    
+                          // Set a callback to run when the Google Visualization API is loaded.
+                          google.charts.setOnLoadCallback(drawChart);
+                    
+                          // Callback that creates and populates a data table,
+                          // instantiates the pie chart, passes in the data and
+                          // draws it.
+                          function drawChart() {
+                    
+                            // Create the data table.
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', 'Place');
+                            data.addColumn('number', 'Number of Racks');
+                            data.addRows([
+                              ['Mount Greenwood', mntg],
+                              ['Loop', lop],
+                              ['Near North Side', nns],
+                              ['Near West Side', nws],
+                              ['Archer Heights', arch],
+                              ['Grand Boulevard', grdb],
+                              ['Lake View', lkev],
+                              ['Washington Heights', wash],
+                              ['Other', oth]
+                            ]);
+                    
+                            // Set chart options
+                            var options = {'title':'Bike Racks in Chicago Communities',
+                                           'width':400,
+                                           'height':300};
+                    
+                            // Instantiate and draw our chart, passing in some options.
+                            var chart = new google.visualization.PieChart(document.getElementById('results'));
+                            chart.draw(data, options);
+                          }
+                        }
+                        
+                        //$("#results").html(html);
+                        
+                    }); // end of getJSON function
+                    
+                });  // end of click function
+                
+            }) // end of ready command
+            
+            
+        </script>
+    </body>
+</html>
