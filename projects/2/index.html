@@ -1,83 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>CTA Bus Tracker</title>
-  <style>
-    div {
-
-    }
-    #wstNrthbd {
-      
-    }
-    #wstSthbd {
-      
-    }
-    #addEstbd {
-      
-    }
-    #addWstbd {
-      
-    }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-</head>
-<body>
-  <h1>CTA Bus Tracker</h1>
-    <select id="routeAndStop">
-        <option value="rt=49&stpid=8417">Western Northbound</option>
-        <option value="rt=49&stpid=8195">Western Southbound</option>
-        <option value="rt=152&stpid=12527">Addison Eastbound</option>
-        <option value="rt=152&stpid=12569">Addison Westbound</option>
-    </select>
-        <button id="submit">Submit</button>
-  <div id="wstNrthbd"></div>    
-  <div id="wstSthbd"></div>    
-  <div id="addEstbd"></div>    
-  <div id="addWstbd"></div>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-      <script>
-        $("#submit").click(function() {
-          $("div").empty();
-          
-          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
-          
-          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions";
-
-          var filter = $("#routeAndStop").val();
-          
-          $.ajax({
-              url: apiPassThruUrl,
-              dataType: "json",
-              method: 'GET',
-              data: {"apiEndpoint": apiEndpoint,
-                      "key" : "7Si7hpmsK8LCBvCYdURcpFAnw",
-                      parameter : filter,
-                      "format":"json"
-                      
-              }
-            }).done (function (data) {
-              console.log(data);
-
-              $.each(data["bustime-response"]["prd"], function(i,v) {
-                if (v.rtdir == "Northbound") {
-                  $("#wstNrthbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                } else if (v.rtdir == "Southbound") {
-                  $("#wstSthbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                } else if (v.rtdir == "Eastbound") {
-                  $("#addEstbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                } else if (v.rtdir == "Westbound") {
-                  $("#addWstbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                }
-                
-              });
-
-            });
-        });
-            
-  
-</script>
- 
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CTA Bus Tracker </title>
+    </head>
+    <style>
+        
+    </style>
+    <body>
+        <h1>CTA Bus Tracker</h1>
+        <p>The mobile bus tracker app will display predicted arrival times of Addison and Western stops using data from the bus tracker API. To use the app, click on the button below to go to the page. Select a stop from a dropdown box and click the "Submit" button to display times.</p>
+        <form method="get" action="bustracker.html">
+            <button type="submit">Use Tracker</button>
+        </form>
+    </body>
 </html>
