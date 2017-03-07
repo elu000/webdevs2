@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Bus Times</title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-pink.min.css" /> 
   <style>
     body {text-align:center;}
+    div {margin:0 auto;}
     hr {margin:0% 25%;}
     select#routeAndStop {
        -webkit-appearance: button;
@@ -28,28 +30,59 @@
        white-space: nowrap;
        width: 300px;
     }
+    .demo-card-wide.mdl-card {
+       width: 512px;
+    }
+    .demo-card-wide > .mdl-card__title {
+       color: #fff;
+       height: 176px;
+       background: url('../assets/demos/welcome_card.jpg') center / cover;
+    }
+    .demo-card-wide > .mdl-card__menu {
+       color: #fff;
+    }
   </style>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-  <h1>CTA Bus Tracker</h1>
-    <select id="routeAndStop">
-        <option value="rt=49&stpid=8417">Western Northbound</option>
-        <option value="rt=49&stpid=8195">Western Southbound</option>
-        <option value="rt=152&stpid=12527">Addison Eastbound</option>
-        <option value="rt=152&stpid=12569">Addison Westbound</option>
-    </select>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submit">Submit</button>
-  <div id="wstNrthbd"></div>    
-  <div id="wstSthbd"></div>    
-  <div id="addEstbd"></div>    
-  <div id="addWstbd"></div>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">CTA Bus Tracker</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="index.html">Home</a>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">CTA Bus Tracker</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="index.html">Home</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <select id="routeAndStop">
+          <option value="rt=49&stpid=8417">Western Northbound</option>
+          <option value="rt=49&stpid=8195">Western Southbound</option>
+          <option value="rt=152&stpid=12527">Addison Eastbound</option>
+          <option value="rt=152&stpid=12569">Addison Westbound</option>
+        </select>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submit">Submit</button>
+            <div id="wstNrthbd"></div>    
+            <div id="wstSthbd"></div>    
+            <div id="addEstbd"></div>    
+            <div id="addWstbd"></div>
+      </div>
+    </main>
+  </div>
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
       <script>
         $("#submit").click(function() {
-          $("div").empty();
+          $("#wstNrthbd, #wstSthbd, #addEstbd, #addWstbd").empty();
           
           var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
           
