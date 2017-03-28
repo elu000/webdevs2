@@ -3,15 +3,56 @@
   <head>
     <!-- Material Design Lite -->
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css">
     <!-- Material Design icon font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Three Screen App</title>
       <style>
           .screen {
               display: none;
           }
+          #screen1 {text-align:center;}
+          #screen1 {margin:0 auto;}
+          hr {margin:0% 25%;}
+          select#station {
+             -webkit-appearance: button;
+             -webkit-border-radius: 2px;
+             -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+             -webkit-padding-end: 20px;
+             -webkit-padding-start: 2px;
+             -webkit-user-select: none;
+             background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+             background-position: 97% center;
+             background-repeat: no-repeat;
+             border: 1px solid #AAA;
+             color: #555;
+             font-size: inherit;
+             margin: 20px;
+             overflow: hidden;
+             padding: 7px 14px;
+             text-overflow: ellipsis;
+             white-space: nowrap;
+             width: 300px;
+          }
+          .demo-card-square.mdl-card {
+            width: 400px;
+            height: 600px;
+            margin: auto;
+          }
+          .demo-card-square > .mdl-card__title {
+            color: #fff;
+            background:
+              bottom right 15% no-repeat #46B6AC;
+          }
+          .mdl-card__supporting-text {
+            overflow-y:scroll; height:115px;
+            color:black;
+          }
+          #screen3, table {
+            margin: 1% auto;
+            text-align:center;
+          }
       </style>
-  
   </head>
   <body>
     <!-- Always shows a header, even in smaller screens. -->
@@ -19,59 +60,319 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Title</span>
+          <span class="mdl-layout-title">Three Screen App</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="">Link 1</a>
-            <a class="mdl-navigation__link" href="">Link 2</a>
-            <a class="mdl-navigation__link" href="">Link 3</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+            <a id="link1a" class="mdl-navigation__link" href="#">Train Tracker</a>
+            <a id="link2a" class="mdl-navigation__link" href="#">Albums</a>
+            <a id="link3a" class="mdl-navigation__link" href="#">Contacts</a>
           </nav>
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">Three Screen App</span>
         <nav class="mdl-navigation">
-          <a id="link1" class="mdl-navigation__link" href="#">Link 1</a>
-          <a id="link2" class="mdl-navigation__link" href="#">Link 2</a>
-          <a id="link3" class="mdl-navigation__link" href="#">Link 3</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+          <a id="link1" class="mdl-navigation__link" href="#">Train Tracker</a>
+          <a id="link2" class="mdl-navigation__link" href="#">Albums</a>
+          <a id="link3" class="mdl-navigation__link" href="#">Contacts</a>
         </nav>
       </div>
       <main class="mdl-layout__content">
         <div id="screen1" class="screen page-content">
-          Screen 1
+          <select id="station">
+            <option value="&max=3&stpid=30273">Addison Red Line (North)</option>
+            <option value="&max=3&stpid=30274">Addison Red Line (South)</option>
+            <option value="&max=3&stpid=30278">Addison Brown Line (North)</option>
+            <option value="&max=3&stpid=30277">Addison Brown Line (South)</option>
+          </select>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submit">Submit</button>
+          <div id="output">
+          </div>
         </div>
         <div id="screen2" class="screen page-content">
-          Screen 2
+          
+          <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title mdl-card--expand" style=background:url(img/bts_wings.png)>
+                    <h2 class="mdl-card__title-text"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    Tracklist:
+                    <ol>
+                    <li>Intro: Boy Meets Evil</li>
+                    <li>Blood Sweat & Tears</li>
+                    <li>Begin</li>
+                    <li>Lie</li>
+                    <li>Stigma</li>
+                    <li>First Love</li>
+                    <li>MAMA</li>
+                    <li>Awake</li>
+                    <li>Lost</li>
+                    <li>BTS Cypher 4</li>
+                    <li>Am I Wrong</li>
+                    <li>21st Century Girl (21세기 소녀)</li>
+                    <li>Two! Three! (Hoping for Better Days) (둘! 셋! (그래도 좋은 날이 더 많기를))</li>
+                    <li>Interlude: Wings</li>
+                    </ol>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=hmE9f-TEutc">
+                      Title Track
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title mdl-card--expand" style=background:url(img/dreamcatcher_chase_me.png)>
+                    <h2 class="mdl-card__title-text"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    Tracklist:
+                    <ol>
+                    <li>Welcome to Dream (Intro)</li>
+                    <li>Chase Me</li>
+                    <li>Emotion</li>
+                    <li>Chase Me (Inst.)</li>
+                    </ol>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=zihoyz0u_cs">
+                      Title Track
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title mdl-card--expand" style=background:url(img/bts_hyym_pt2.png)>
+                    <h2 class="mdl-card__title-text"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    Tracklist:
+                    <ol>
+                    <li>Intro: Never Mind</li>
+                    <li>Run</li>
+                    <li>Butterfly</li>
+                    <li>Whalien 52</li>
+                    <li>Ma City</li>
+                    <li>뱁새 (Baepsae/Silver Spoon)</li>
+                    <li>Skit: One Night in a Strange City</li>
+                    <li>고엽 (Dead Leaves)</li>
+                    <li>Outro: House of Cards</li>
+                    </ol>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=5Wn85Ge22FQ">
+                      Title Track
+                    </a>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title mdl-card--expand" style=background:url(img/exo_ex_act.png)>
+                    <h2 class="mdl-card__title-text"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    Tracklist:
+                    <ol>
+                    <li>Lucky One</li>
+                    <li>Monster</li>
+                    <li>Artificial Love</li>
+                    <li>Cloud 9</li>
+                    <li>Heaven</li>
+                    <li>White Noise (백색소음)</li>
+                    <li>One and Only (유리어항)</li>
+                    <li>They Never Know</li>
+                    <li>Stronger</li>
+                    <li>Lucky One (Instrumental)</li>
+                    <li>Monster (Instrumental)</li>
+                    </ol>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=KSH-FVVtTf0">
+                      Title Track
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title mdl-card--expand" style=background:url(img/red_velvet_russian_roulette.png)>
+                    <h2 class="mdl-card__title-text"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    Tracklist:
+                    <ol>
+                    <li>Russian Roulette (러시안 룰렛)</li>
+                    <li>Lucky Girl</li>
+                    <li>Bad Dracula</li>
+                    <li>Sunny Afternoon</li>
+                    <li>Fool</li>
+                    <li>Some Love</li>
+                    <li>My Dear</li>
+                    </ol>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=QslJYDX3o8s">
+                      Title Track
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title mdl-card--expand" style=background:url(img/got7_turbulence.png)>
+                    <h2 class="mdl-card__title-text"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    Tracklist:
+                    <ol>
+                    <li>skyway</li>
+                    <li>하드캐리 (Hard Carry)</li>
+                    <li>Boom x3</li>
+                    <li>Prove It</li>
+                    <li>노잼 (No Jam)</li>
+                    <li>HEY</li>
+                    <li>Mayday</li>
+                    <li>My Home</li>
+                    <li>Who's That</li>
+                    <li>만약에 (If)</li>
+                    <li>아파 (Sick)</li>
+                    <li>니꿈꿔 (Dreamin')</li>
+                    <li>Let Me</li>
+                    </ol>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=O57jr1oZDIw">
+                      Title Track
+                    </a>
+                  </div>
+                </div>
+              </div>
+          </div>
+              
         </div>
         <div id="screen3" class="screen page-content">
-          Screen 3
+          <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <!-- Simple Textfield -->
+          <form action="#">
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="sample1">
+              <label class="mdl-textfield__label" for="sample1">Text...</label>
+            </div>
+          </form>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submit">Submit</button>
         </div>
       </main>
     </div>
+
+        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
+        $('.mdl-navigation__link').click(function(){
+                
+          //  the drawer
+            $('.mdl-layout__drawer').toggleClass('is-visible');
+        
+          // the transparent overlay that shows when you open the drawer
+            $('.mdl-layout__obfuscator').toggleClass('is-visible');   
+                    
+         });
+
+        $("#submit").click(function() {
+          console.log("test");
+          $("#output").empty();  
+                  
+            /*var url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx";
+            var apikey = "?key=dc4172de7e984009a3c3b8eb778b803c";
+            var max = "&max=3";
+            var filter = $("#station").val();
+            var fullUrl = url + apikey + max + filter;
+                  
+            $.getJSON(fullUrl)*/
+                    
+                    
+            var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+            var apiEndpoint = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx";
+            var filter = $("#station").val();
+          
+              $.ajax({
+                url: apiPassThruUrl,
+                dataType: "json",
+                method: 'GET',
+                data: {"apiEndpoint": apiEndpoint,
+                       "key" : "dc4172de7e984009a3c3b8eb778b803c",
+                       "parameter" : filter,
+                       "format":"json"
+                              
+                      }
+              }).done (function (data) {
+                  console.log(data);
+                
+                    $.each(data["ctatt"]["eta"], function(i,v) {
+                      $("#output").append("<p>Station: " + v.staNm + "</p>" +  
+                                              "<p>Line: " + v.rt + "</p>" + "<p>Destination: " + v.stpDe + "</p>" + 
+                                              "<p>Estimated Arrival: " + v.prdt - v.arrT + "</p>" + "<hr>");
+                    });
+                }); 
+               
+        });            
+    
         $(function(){
            $("#screen1").show(); 
            
-           $("#link1").on("click", function(){
+           $("#link1, #link1a").on("click", function(){
                $(".screen").hide();
                $("#screen1").show();
-           })
+           });
            
-           $("#link2").on("click", function(){
+           $("#link2, #link2a").on("click", function(){
                $(".screen").hide();
                $("#screen2").show();
-           })
+                  
+           });
            
-           $("#link3").on("click", function(){
+           $("#link3, #link3a").on("click", function(){
                $(".screen").hide();
                $("#screen3").show();
-           })
-        })
+           });
+        });
     </script>
     
   </body>
