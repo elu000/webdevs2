@@ -303,10 +303,16 @@
           <!-- Simple Textfield -->
           <form action="#">
             <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" id="sample1">
-              <label class="mdl-textfield__label" for="sample1">Text...</label>
+              <input class="mdl-textfield__input" id="conName" type="text" id="sample1">
+              <label class="mdl-textfield__label" for="sample1">Name...Phone...Email...</label>
+              <input class="mdl-textfield__input" id="conPhone" type="text" id="sample1">
+              <input class="mdl-textfield__input" id="canEmail" type="text" id="sample1">
             </div>
           </form>
+          <!-- Colored FAB button -->
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="addtr">
+            <i class="material-icons">add</i>
+          </button>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submit1">Submit</button>
         </div>
       </main>
@@ -362,7 +368,22 @@
                     });
                 }); 
                
-        });            
+        });  
+        
+        $("#addtr").click(function() {
+           $("tbody").append('<tr>' +
+                                '<td class="mdl-data-table__cell--non-numeric"></td>' +
+                                '<td></td>' +
+                                '<td></td>' +
+                              '</tr>'
+           ); 
+        });
+        
+        $("#submit1").click(function() {
+           $("#conName").val()
+           $("#conPhone").val() 
+           $("#conEmail").val() 
+        });
     
         $(function(){
            $("#screen1").show(); 
