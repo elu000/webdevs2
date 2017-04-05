@@ -1,106 +1,139 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Material Design Lite -->
-        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-        <!-- Material Design icon font -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        
-        <title> </title>
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <title>Indexed DB</title>
     </head>
     <body>
-        <!-- Simple header with fixed tabs. -->
-            <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
-                        mdl-layout--fixed-tabs">
-              <header class="mdl-layout__header">
-                <div class="mdl-layout__header-row">
-                  <!-- Title -->
-                  <span class="mdl-layout-title">Title</span>
+      <!-- Simple header with fixed tabs. -->
+      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                  mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Title</span>
+          </div>
+          <!-- Tabs -->
+          <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Display Employees</a>
+            <a href="#fixed-tab-2" class="mdl-layout__tab">Add Employees</a>
+            <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+          </div>
+        </header>
+        <div class="mdl-layout__drawer">
+          <span class="mdl-layout-title">Title</span>
+        </div>
+        <main class="mdl-layout__content">
+          <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+            <div class="page-content">
+              <!-- Simple Textfield -->
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="input">
+                  <label class="mdl-textfield__label" for="input">Text...</label>
                 </div>
-                <!-- Tabs -->
-                <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                  <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>
-                  <a href="#fixed-tab-2" class="mdl-layout__tab">Tab 2</a>
-                  <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+              </form>
+              <!-- Accent-colored raised button with ripple -->
+              <button id="displayEmp" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Search
+              </button>
+                <div id="display">
                 </div>
-              </header>
-              <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Title</span>
-              </div>
-              <main class="mdl-layout__content">
-                <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                  <div class="page-content">
-                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                       Display
-                     </button>
-                   <div id="display"></div>
-                  </div>
-                </section>
-                <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                  <div class="page-content">
-                    <!-- Simple Textfield -->
-                    <form action="#">
-                      <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" id="sample1">
-                        <label class="mdl-textfield__label" for="sample1">Text...</label>
-                      </div>
-                    </form>
-                    <!-- Accent-colored raised button with ripple -->
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                      Search
-                    </button>
-                  </div>
-                </section>
-                <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-                  <div class="page-content"><!-- Your content goes here --></div>
-                </section>
-              </main>
             </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
-        <script>
+          </section>
+          <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+            <div class="page-content">
+              <!-- Simple Textfield -->
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="nameVal">
+                  <label class="mdl-textfield__label" for="nameVal">Name...</label>
+                </div>
+              </form>
+              <!-- Simple Textfield -->
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="titleVal">
+                  <label class="mdl-textfield__label" for="titleVal">Title...</label>
+                </div>
+              </form>
+              <!-- Simple Textfield -->
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="salVal">
+                  <label class="mdl-textfield__label" for="salVal">Salary...</label>
+                </div>
+              </form>
+              <!-- Simple Textfield -->
+              <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="depVal">
+                  <label class="mdl-textfield__label" for="depVal">Department...</label>
+                </div>
+              </form>
+              <!-- Colored FAB button with ripple -->
+              <button id="addEmploy" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                <i class="material-icons">add</i>
+              </button>
+            </div>
+          </section>
+          <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+            <div class="page-content"><!-- Your content goes here --></div>
+          </section>
+        </main>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script>
+      
+        var url = "https://data.cityofchicago.org/resource/tt4n-kn4t.json?department=CITY COUNCIL";
+        
+        var db = new Dexie("employeeDB");
+          db.version(1).stores({
+              employees: '++id,name,department,title,salary'
+          });
             
-            var url = "https://data.cityofchicago.org/resource/tt4n-kn4t.json?department=CITY%20COUNCIL";
-                             
-              $.getJSON(url)
-                .done (function (data) {
-                    console.log(data);
-                    
-                    var db = new Dexie("employeeDB");
-                    db.version(1).stores({
-                        employees: '++id,name,department,title,salary'
-                    });
-                    
-                    db.employees.count().then(function(count){
-                      console.log(count);
-                      
-                      if (count == 0) {
-                        
-                      } 
-                    });
-                    
-                    $.each(data, function(i,v) {
-                      db.employees.add({
-                        name: v.name,
-                        title: v.job_titles,
-                        salary: v.employee_annual_salary,
-                        department: v.department
-                      });
-                      
-                    });
-                  
-                }); 
+
+        $("#displayEmp").click(function(){
+          $("#display").empty();
+          $.getJSON(url)
+            .done(function(data){
+              console.log(data);
               
-              function displayEmployees(){
-                console.log(strQuery);
-                db.employees.each(function(){
-                  var html = "<strong>" + employee.name + "</strong>" 
-                  html+= "<br>" +employee.department + "<br><br>";
-                  $("#display").append(html);
-                }); 
-              }
-                
-        </script>    
+              db.employees.count().then(function(count){
+                console.log("count");
+                if (count == 0) {
+                  $.each(data, function(i,v){
+                    db.employees.add({
+                      name: v.name,
+                      title: v.job_titles,
+                      salary: v.employee_annual_salary,
+                      department: v.department
+                    });
+                  });
+                }
+              });
+  
+              db.employees.where("name").startsWithIgnoreCase($("input").val()).each(function(employee,v){
+                var html = "<strong>" + employee.name + "</strong>";
+                html += "<br>" + employee.department + "<br><br>";
+                $("#display").append(html);  
+              });
+              
+            });
+        });
+        
+        $("#addEmploy").click(function(){
+          db.employees.add({
+            name: $("#nameVal").val(),
+            title: $("#titleVal").val(),
+            salary: $("#salVal").val(),
+            department: $("#depVal").val()
+          });
+        });
+        
+      </script>
     </body>
 </html>
