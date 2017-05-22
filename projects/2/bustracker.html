@@ -5,7 +5,8 @@
   <title>Bus Times</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-pink.min.css" /> 
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {text-align:center;}
     div {margin:0 auto;}
@@ -57,12 +58,11 @@
           <option value="rt=49&stpid=8195">Western Southbound</option>
           <option value="rt=152&stpid=12527">Addison Eastbound</option>
           <option value="rt=152&stpid=12569">Addison Westbound</option>
+          <option value=""></option>
+          <option value=""></option>
         </select>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submit">Submit</button>
-            <div id="wstNrthbd"></div>    
-            <div id="wstSthbd"></div>    
-            <div id="addEstbd"></div>    
-            <div id="addWstbd"></div>
+            <div id="output"></div>    
       </div>
     </main>
   </div>
@@ -93,15 +93,7 @@
               console.log(data);
 
               $.each(data["bustime-response"]["prd"], function(i,v) {
-                if (v.rtdir == "Northbound") {
-                  $("#wstNrthbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                } else if (v.rtdir == "Southbound") {
-                  $("#wstSthbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                } else if (v.rtdir == "Eastbound") {
-                  $("#addEstbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                } else if (v.rtdir == "Westbound") {
-                  $("#addWstbd").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
-                }
+                  $("#output").append("<p>Route: " + v.rt + "</p>" + "<p>Time of Arrival (min): " + v.prdctdn + "</p>" + "<hr>");
                 
               });
 

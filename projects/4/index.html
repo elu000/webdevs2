@@ -393,10 +393,18 @@
         $("#enter").click(function() {
            $("#nameIn").append($("#nameInput").val());
            if ($("#nameIn")) {
-             
+             $("#nameIn").append($("#nameInput").val());
            }
+           
            $("#phoneIn").append($("#phoneInput").val());
+           if ($("#phoneIn")) {
+              $("#phoneIn").append($("#phoneInput").val());
+           }
+           
            $("#emailIn").append($("#emailInput").val());
+           if ($("#emailIn")) {
+              $("#emailIn").append($("#emailInInput").val());
+           }
         });
     
         $(function(){
