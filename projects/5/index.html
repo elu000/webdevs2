@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <style>
+            canvas {
+              border: #333 1px solid;
+            }
+          </style>
+    </head>
+    <body>
+        <canvas id="canvasEle" width="550px" height="350px"></canvas>
+        
+        <script>
+            var canvas = document.querySelector("#canvasEle");
+            var context = canvas.getContext("2d");
+            
+            var gradient=context.createLinearGradient(0,0,0,275);
+            gradient.addColorStop(0,"black");
+            gradient.addColorStop(1,"white");
+            
+            function circle1() {
+                context.beginPath();
+                context.arc(200, 100, 50, 0, 2 * Math.PI, true);
+                context.stroke();
+                context.closePath();
+            }
+            
+            function circle2() {
+                context.beginPath();
+                context.arc(305, 205, 50, 0, 2 * Math.PI, true);
+                context.stroke();
+                context.fillStyle = "black";
+                context.fill();
+                context.closePath();
+            }
+            
+            function circle3() {
+                var img = new Image();
+                img.src = 'stripes.jpg';
+                img.onload = function() {
+                    var pattern = context.createPattern(img, 'repeat');
+                    context.beginPath();
+                    context.arc(305, 100, 50, 0, 2 * Math.PI, true);
+                    context.stroke();
+                    context.fillStyle = pattern;
+                    context.fill();
+                    context.closePath();
+                };
+            }
+            
+            function circle4() {
+                context.beginPath();
+                context.arc(200, 205, 50, 0, 2 * Math.PI, true);
+                context.stroke();
+                context.fillStyle = gradient;
+                context.fill();
+                context.closePath();
+            }
+                
+            circle1();
+            circle2();
+            circle3();
+            circle4();
+            
+        </script>
+    </body>
+</html>
