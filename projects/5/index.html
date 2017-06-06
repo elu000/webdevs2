@@ -21,7 +21,18 @@
             
             function circle1() {
                 context.beginPath();
-                context.arc(200, 100, 50, 0, 2 * Math.PI, true);
+                context.moveTo(150, 125);
+                context.quadraticCurveTo(135, 30, 250, 75);
+                context.fillStyle = "black";
+                context.fill();
+                context.stroke();
+                context.closePath();
+                
+                context.beginPath();
+                context.moveTo(150, 125);
+                context.quadraticCurveTo(145, 30, 245, 90);
+                context.fillStyle = "gray";
+                context.fill();
                 context.stroke();
                 context.closePath();
             }
